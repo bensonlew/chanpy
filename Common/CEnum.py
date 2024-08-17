@@ -6,6 +6,7 @@ class DATA_SRC(Enum):
     BAO_STOCK = auto()
     CCXT = auto()
     CSV = auto()
+    parquet = auto()
 
 
 class KL_TYPE(Enum):

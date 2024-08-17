@@ -1,0 +1,15 @@
+
+./pip install -i https://pypi.tuna.tsinghua.edu.cn/simple cython==0.29.30
+
+./pip install -i https://pypi.tuna.tsinghua.edu.cn/simple flask==1.1.4
+
+
+
+./pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pandas==1.1.4
+
+./pip install -i https://pypi.tuna.tsinghua.edu.cn/simple scikit-image==0.19.3
+./pip install -i https://pypi.tuna.tsinghua.edu.cn/simple scikit-learn==1.0.2
+./pip install -i https://pypi.tuna.tsinghua.edu.cn/simple scipy==1.7.3
+./pip install -i https://pypi.tuna.tsinghua.edu.cn/simple statsmodels==0.13.2
+
+

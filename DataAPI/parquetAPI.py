@@ -32,7 +32,7 @@ def parse_time_column(inp):
     return CTime(year, month, day, hour, minute)
 
 
-import pyarrow.parquet as pq
+# import pyarrow.parquet as pq
 
 
 class Parquet_API(CCommonStockApi):
@@ -52,26 +52,27 @@ class Parquet_API(CCommonStockApi):
 
     def get_kl_data(self):
         cur_path = os.path.dirname(os.path.realpath(__file__))
-        file_path = f"{cur_path}/../{self.code}.parquet"
+        file_path = f"/home/liubinxu/work/finance_learning/test/{self.code}.qfq.parquet"
         if not os.path.exists(file_path):
             raise CChanException(f"file not exist: {file_path}", ErrCode.SRC_DATA_NOT_FOUND)
 
-        table = pq.read_parquet(file_path)
+        table = pd.read_parquet(file_path)
         for row in table.iterrows():
             data_dict = dict(row[1])
-            if len(data) != len(self.columns):
-                raise CChanException(f"file format error: {file_path}", ErrCode.SRC_DATA_FORMAT_ERROR)
-            if self.begin_date is not None and data[self.time_column_idx] < self.begin_date:
-                continue
-            if self.end_date is not None and data[self.time_column_idx] > self.end_date:
-                continue
+            # if len(data) != len(self.columns):
+            #     raise CChanException(f"file format error: {file_path}", ErrCode.SRC_DATA_FORMAT_ERROR)
+
             data = [
-                data_dict["datatime"],
+                data_dict["datetime"],
                 data_dict[DATA_FIELD.FIELD_OPEN],
                 data_dict[DATA_FIELD.FIELD_HIGH],
                 data_dict[DATA_FIELD.FIELD_LOW],
                 data_dict[DATA_FIELD.FIELD_CLOSE],
             ]
+            if self.begin_date is not None and str(data[self.time_column_idx]) < self.begin_date:
+                continue
+            if self.end_date is not None and str(data[self.time_column_idx]) > self.end_date:
+                continue
             yield CKLine_Unit(create_item_dict(data, self.columns))
 
     def SetBasciInfo(self):
