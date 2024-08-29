@@ -8,6 +8,10 @@ class CFeatures:
     def items(self):
         yield from self.__features.items()
 
+    # @property
+    def features(self):
+        return self.__features
+
     def __getitem__(self, k):
         return self.__features[k]
 
