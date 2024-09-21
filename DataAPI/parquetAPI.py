@@ -52,11 +52,13 @@ class Parquet_API(CCommonStockApi):
 
     def get_kl_data(self):
         cur_path = os.path.dirname(os.path.realpath(__file__))
-        file_path = f"/home/liubinxu/work/finance_learning/test/{self.code}.qfq.parquet"
+        fdata_dir = os.environ.get('FDATA', '/home/liubinxu/work/finance_learning/test')
+        file_path = f"{fdata_dir}/{self.code}.qfq.parquet"
         if not os.path.exists(file_path):
             raise CChanException(f"file not exist: {file_path}", ErrCode.SRC_DATA_NOT_FOUND)
 
         table = pd.read_parquet(file_path)
+        print("table: ", len(table))
         for row in table.iterrows():
             data_dict = dict(row[1])
             # if len(data) != len(self.columns):

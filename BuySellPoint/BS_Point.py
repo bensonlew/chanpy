@@ -19,6 +19,11 @@ class CBS_Point(Generic[LINE_TYPE]):
         self.bi.bsp = self  # type: ignore
         self.features = CFeatures(feature_dict)
 
+
+
+
+        
+
         self.is_segbsp = False
 
         self.init_common_feature()
